@@ -1,98 +1,337 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Quotes Challenge API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API desenvolvida com NestJS para gerenciamento de citações (quotes), tags e usuários.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Descrição
 
-## Description
+API RESTful construída com NestJS que permite gerenciar citações, tags e usuários. O projeto inclui autenticação JWT, integração com MongoDB e documentação interativa da API.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🛠️ Tecnologias Utilizadas
 
-## Project setup
+### Core
 
-```bash
-$ pnpm install
-```
+- **NestJS** (^11.0.1) - Framework Node.js progressivo
+- **TypeScript** (^5.7.3) - Linguagem de programação
+- **Fastify** (^5.6.2) - Servidor HTTP de alta performance
 
-## Compile and run the project
+### Banco de Dados
 
-```bash
-# development
-$ pnpm run start
+- **MongoDB** - Banco de dados NoSQL
+- **Mongoose** (^9.0.1) - ODM para MongoDB
+- **@nestjs/mongoose** (^11.0.3) - Integração NestJS com Mongoose
 
-# watch mode
-$ pnpm run start:dev
+### Autenticação
 
-# production mode
-$ pnpm run start:prod
-```
+- **@nestjs/jwt** (^11.0.2) - Autenticação JWT
+- **bcrypt** (^6.0.0) - Hash de senhas
 
-## Run tests
+### Documentação
 
-```bash
-# unit tests
-$ pnpm run test
+- **@nestjs/swagger** (^11.2.3) - Documentação Swagger
+- **@scalar/nestjs-api-reference** (^1.0.11) - Interface de documentação interativa
 
-# e2e tests
-$ pnpm run test:e2e
+### Outras
 
-# test coverage
-$ pnpm run test:cov
-```
+- **Puppeteer** (^24.32.1) - Web scraping/crawler
+- **RxJS** (^7.8.1) - Programação reativa
 
-## Deployment
+### Desenvolvimento
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- **pnpm** - Gerenciador de pacotes
+- **ESLint** - Linter
+- **Prettier** - Formatador de código
+- **Jest** - Framework de testes
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 📦 Requisitos
+
+Antes de começar, certifique-se de ter instalado:
+
+- **Node.js** (versão 18 ou superior)
+- **pnpm** (gerenciador de pacotes)
+- **MongoDB** (rodando localmente ou acesso a uma instância)
+
+### Instalando o pnpm
+
+Se você ainda não tem o pnpm instalado:
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+npm install -g pnpm
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🚀 Como Rodar o Projeto
 
-## Resources
+### 1. Instalar dependências
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+pnpm install
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 2. Configurar o MongoDB
 
-## Support
+Certifique-se de que o MongoDB está rodando localmente na porta padrão (27017). O projeto está configurado para conectar em `mongodb://localhost/nest`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Se você precisar alterar a string de conexão, edite o arquivo `src/app.module.ts`:
 
-## Stay in touch
+```typescript
+MongooseModule.forRoot('mongodb://localhost/nest');
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 3. Configurar variáveis de ambiente (opcional)
 
-## License
+O projeto usa a porta 3000 por padrão. Para alterar, você pode definir a variável de ambiente `PORT`:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+# Windows (PowerShell)
+$env:PORT=3000
+
+# Linux/Mac
+export PORT=3000
+```
+
+### 4. Executar o projeto
+
+```bash
+# Modo desenvolvimento (com hot-reload)
+pnpm run start:dev
+
+# Modo produção
+pnpm run start:prod
+
+# Modo debug
+pnpm run start:debug
+```
+
+A API estará disponível em `http://localhost:3000` (ou na porta configurada).
+
+### 5. Acessar a documentação
+
+Após iniciar o servidor, acesse a documentação interativa da API em:
+
+```
+http://localhost:3000/docs
+```
+
+## 📡 Endpoints da API
+
+### Autenticação
+
+#### `POST /auth/login`
+
+Autentica um usuário e retorna um token JWT.
+
+**Body:**
+
+```json
+{
+  "name": "nome_do_usuario",
+  "password": "senha_do_usuario"
+}
+```
+
+**Resposta:**
+
+```json
+{
+  "access_token": "jwt_token_aqui"
+}
+```
+
+---
+
+### Usuários
+
+#### `GET /users`
+
+Lista todos os usuários. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+#### `GET /users/:name`
+
+Busca um usuário pelo nome. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+#### `POST /users`
+
+Cria um novo usuário. **Não requer autenticação.**
+
+**Body:**
+
+```json
+{
+  "name": "nome_do_usuario",
+  "password": "senha_do_usuario"
+}
+```
+
+---
+
+### Citações (Quotes)
+
+#### `GET /quotes`
+
+Lista todas as citações. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+#### `POST /quotes`
+
+Cria uma nova citação. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Body:**
+
+```json
+{
+  "text": "Texto da citação",
+  "author": "Autor da citação",
+  "tags": ["tag1", "tag2"]
+}
+```
+
+#### `GET /quotes/:searchTag`
+
+Busca citações por tag. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Exemplo:** `GET /quotes/motivacional`
+
+---
+
+### Tags
+
+#### `GET /tags`
+
+Lista todas as tags. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+#### `POST /tags`
+
+Cria uma nova tag. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Body:**
+
+```json
+{
+  "name": "nome_da_tag"
+}
+```
+
+#### `GET /tags/:name`
+
+Busca uma tag pelo nome. **Requer autenticação.**
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+---
+
+## 🔐 Autenticação
+
+A maioria dos endpoints requer autenticação via JWT. Para acessar endpoints protegidos:
+
+1. Faça login em `POST /auth/login` para obter o token
+2. Inclua o token no header `Authorization` no formato:
+   ```
+   Authorization: Bearer <seu_token_jwt>
+   ```
+
+**Endpoints públicos (não requerem autenticação):**
+
+- `POST /auth/login`
+- `POST /users`
+
+## 🧪 Testes
+
+```bash
+# Executar testes unitários
+pnpm run test
+
+# Executar testes em modo watch
+pnpm run test:watch
+
+# Executar testes e2e
+pnpm run test:e2e
+
+# Executar testes com cobertura
+pnpm run test:cov
+```
+
+## 🏗️ Build
+
+```bash
+# Compilar o projeto
+pnpm run build
+```
+
+O código compilado será gerado na pasta `dist/`.
+
+## 📝 Scripts Disponíveis
+
+- `pnpm run start` - Inicia o servidor
+- `pnpm run start:dev` - Inicia em modo desenvolvimento (watch mode)
+- `pnpm run start:debug` - Inicia em modo debug
+- `pnpm run start:prod` - Inicia em modo produção
+- `pnpm run build` - Compila o projeto
+- `pnpm run format` - Formata o código com Prettier
+- `pnpm run lint` - Executa o linter e corrige problemas
+- `pnpm run test` - Executa testes unitários
+- `pnpm run test:e2e` - Executa testes end-to-end
+- `pnpm run test:cov` - Executa testes com cobertura
+
+## 📚 Estrutura do Projeto
+
+```
+src/
+├── auth/              # Módulo de autenticação
+│   ├── controller/    # Controller de autenticação
+│   ├── middleware/    # Middleware de autenticação
+│   └── service/       # Serviço de autenticação
+├── features/
+│   ├── crawler/       # Módulo de web scraping
+│   ├── quote/         # Módulo de citações
+│   ├── tag/           # Módulo de tags
+│   └── user/          # Módulo de usuários
+└── main.ts            # Arquivo principal da aplicação
+```
+
+## 📄 Licença
+
+Este projeto é privado e não licenciado.
