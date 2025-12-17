@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { JsonWebTokenError, JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { jwtConstants } from './constants';
+import { jwtConstants } from '../constants';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {

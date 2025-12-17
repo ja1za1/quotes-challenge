@@ -1,5 +1,5 @@
 import { TagModule } from '../tag/tag.module';
-import { CrawlerService } from './crawler.service';
+import { CrawlerService } from './service/crawler.service';
 
 import { Module } from '@nestjs/common';
 

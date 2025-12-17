@@ -19,12 +19,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
 
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  const apiDoc = documentFactory();
-  SwaggerModule.setup('docs', app, apiDoc);
+  const apiDoc = SwaggerModule.createDocument(app, config);
+  // SwaggerModule.setup('docs', app, apiDoc);
 
   app.use(
-    '/reference',
+    '/docs',
     apiReference({
       content: apiDoc,
       withFastify: true,

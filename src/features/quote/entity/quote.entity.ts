@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { Tag } from '../tag/tag.entity';
+import mongoose, { Document, HydratedDocument } from 'mongoose';
+import { Tag } from '../../tag/entity/tag.entity';
 
 @Schema({ timestamps: true })
-export class Quote {
+export class Quote extends Document {
   @Prop({ required: true })
   quote: string;
 

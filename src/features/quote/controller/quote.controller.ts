@@ -1,25 +1,23 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { Quote, QuoteDocument } from './quote.entity';
-import { QuoteService } from './quote.service';
+import { CreateQuoteDto } from '../dto/create-quote.dto';
+import { QuoteService } from '../service/quote.service';
 
 @Controller('quotes')
 export class QuoteController {
   constructor(private readonly quoteService: QuoteService) {}
 
   @Get()
-  async findAll(): Promise<QuoteDocument[]> {
+  async findAll() {
     return this.quoteService.findAll();
   }
 
   @Post()
-  async create(@Body() quote: Quote): Promise<QuoteDocument> {
+  async create(@Body() quote: CreateQuoteDto) {
     return this.quoteService.create(quote);
   }
 
   @Get(':searchTag')
   async searchByTag(@Param('searchTag') tag: string) {
-    return {
-      quotes: await this.quoteService.findByTag(tag),
-    };
+    return await this.quoteService.findByTag(tag);
   }
 }

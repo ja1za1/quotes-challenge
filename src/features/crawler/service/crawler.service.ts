@@ -4,14 +4,15 @@ https://docs.nestjs.com/providers#services
 
 import { Injectable, OnModuleDestroy } from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
-import { TagService } from '../tag/tag.service';
+import { CreateQuoteDto } from 'src/features/quote/dto/create-quote.dto';
+import { TagService } from '../../tag/service/tag.service';
 
 @Injectable()
 export class CrawlerService implements OnModuleDestroy {
   constructor(private tagsService: TagService) {}
   private browser: puppeteer.Browser;
 
-  async crawlQuotesByTag(tag: string) {
+  async crawlQuotesByTag(tag: string): Promise<CreateQuoteDto[]> {
     const url = `http://quotes.toscrape.com/tag/${encodeURIComponent(tag)}/`;
 
     const page = await this.browser.newPage();
@@ -25,12 +26,7 @@ export class CrawlerService implements OnModuleDestroy {
 
       const data = await page.evaluate(() => {
         const quoteElements = Array.from(document.querySelectorAll('.quote'));
-        const quotes: {
-          quote: string;
-          author: string;
-          authorAbout: string;
-          tags: string[];
-        }[] = [];
+        const quotes: CreateQuoteDto[] = [];
         for (const quoteElement of quoteElements) {
           const text =
             quoteElement.querySelector('.text')?.textContent?.trim() ??

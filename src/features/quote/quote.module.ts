@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CrawlerModule } from '../crawler/crawler.module';
 import { TagModule } from '../tag/tag.module';
-import { QuoteController } from './quote.controller';
-import { Quote, QuoteSchema } from './quote.entity';
-import { QuoteService } from './quote.service';
+import { QuoteController } from './controller/quote.controller';
+import { Quote, QuoteSchema } from './entity/quote.entity';
+import { QuoteService } from './service/quote.service';
 
 @Module({
   imports: [
