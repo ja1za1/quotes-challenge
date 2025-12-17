@@ -33,7 +33,6 @@ API RESTful construída com NestJS que permite gerenciar citações, tags e usu�
 ### Outras
 
 - **Puppeteer** (^24.32.1) - Web scraping/crawler
-- **RxJS** (^7.8.1) - Programação reativa
 
 ### Desenvolvimento
 
