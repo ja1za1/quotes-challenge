@@ -4,6 +4,7 @@ https://docs.nestjs.com/providers#services
 
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { Model } from 'mongoose';
 import { CrawlerService } from '../../crawler/service/crawler.service';
 import { TagService } from '../../tag/service/tag.service';
@@ -89,19 +90,23 @@ export class QuoteService {
     await this.tagService.updateTag({ name: tag, isSearched: true });
 
     return {
-      quotes: quotesToReturn,
-      total: quotesToReturn.length,
+      quotes: quotesToReturn.quotes,
+      total: quotesToReturn.quotes.length,
     };
   }
 
   private async processCrawledQuotes(
     crawledQuotes: CreateQuoteDto[],
-  ): Promise<ResponseQuoteDto[]> {
+  ): Promise<{ quotes: ResponseQuoteDto[]; insertedQuotes: number }> {
     if (crawledQuotes.length === 0) {
-      return [];
+      return {
+        quotes: [],
+        insertedQuotes: 0,
+      };
     }
 
     const quotesToReturn: ResponseQuoteDto[] = [];
+    let insertedQuotes: number = 0;
     for (const quoteData of crawledQuotes) {
       let quote: ResponseQuoteDto;
       try {
@@ -109,6 +114,7 @@ export class QuoteService {
       } catch (error) {
         if (error instanceof NotFoundException) {
           quote = await this.create(quoteData);
+          insertedQuotes++;
         } else {
           this.logger.error(error);
           continue;
@@ -117,6 +123,32 @@ export class QuoteService {
       quotesToReturn.push(quote);
     }
 
-    return quotesToReturn;
+    return {
+      quotes: quotesToReturn,
+      insertedQuotes,
+    };
+  }
+
+  @Cron(CronExpression.EVERY_12_HOURS)
+  async updateQuotesFromTags() {
+    this.logger.log('Iniciando atualização de quotes...');
+    const tags = await this.tagService.findAll();
+
+    if (tags.length === 0) {
+      this.logger.debug(`Atualização de tags falhou. Nenhuma tag encontrada`);
+      return;
+    }
+
+    for (const tag of tags) {
+      const crawledQuotes = await this.crawlerService.crawlQuotesByTag(
+        tag.name,
+      );
+
+      const processedQuotes = await this.processCrawledQuotes(crawledQuotes);
+
+      this.logger.debug(
+        `Foram encontradas ${processedQuotes.insertedQuotes} novas quotes para a tag ${tag.name}`,
+      );
+    }
   }
 }

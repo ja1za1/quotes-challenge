@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { CrawlerModule } from './features/crawler/crawler.module';
 import { QuoteModule } from './features/quote/quote.module';
@@ -24,6 +25,7 @@ import { UserModule } from './features/user/user.module';
       }),
       inject: [ConfigService],
     }),
+    ScheduleModule.forRoot(),
   ],
 })
 export class AppModule {}
