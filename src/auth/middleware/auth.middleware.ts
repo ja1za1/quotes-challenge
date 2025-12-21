@@ -4,15 +4,18 @@ import {
   NestMiddleware,
   UnauthorizedException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JsonWebTokenError, JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { jwtConstants } from '../constants';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   private readonly logger = new Logger(AuthMiddleware.name);
 
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+  ) {}
 
   async use(
     req: FastifyRequest['raw'],
@@ -47,7 +50,7 @@ export class AuthMiddleware implements NestMiddleware {
         sub: string;
         name: string;
       }>(token, {
-        secret: jwtConstants.secret,
+        secret: this.configService.get<string>('JWT_SECRET'),
       });
 
       // 6. Adicionar o payload do token à requisição para uso posterior

@@ -1,3 +1,5 @@
+import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
@@ -13,23 +15,32 @@ async function bootstrap() {
     new FastifyAdapter({ logger: true }),
   );
 
-  const config = new DocumentBuilder()
+  const configService = app.get(ConfigService);
+  const apiDocsConfig = new DocumentBuilder()
     .setTitle('Quotes Challenge')
     .setDescription('The Quotes Challenge API description')
     .setVersion('1.0')
     .build();
 
-  const apiDoc = SwaggerModule.createDocument(app, config);
+  const apiDoc = SwaggerModule.createDocument(app, apiDocsConfig);
   // SwaggerModule.setup('docs', app, apiDoc);
 
   app.use(
-    '/docs',
+    '/v1/api/docs',
     apiReference({
       content: apiDoc,
       withFastify: true,
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  app.setGlobalPrefix('/v1/api');
+  const port = configService.get<number>('API_PORT', 3000);
+  const baseUrl = configService.get<string>('API_BASE_URL', 'http://localhost');
+  const logger = new Logger('App');
+
+  await app.listen(port).then(() => {
+    logger.log(`API rodando na porta ${port}`);
+    logger.log(`Documentaçao em ${baseUrl}:${port}/v1/api/docs`);
+  });
 }
 bootstrap();
